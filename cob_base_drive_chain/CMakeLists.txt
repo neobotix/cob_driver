@@ -9,9 +9,10 @@ find_package(catkin REQUIRED COMPONENTS roscpp std_msgs sensor_msgs message_gene
 #######################################
 
 add_service_files(
+  DIRECTORY srv
   FILES
-  ElmoRecorderConfig.srv 
-  ElmoRecorderReadout.srv 
+    ElmoRecorderConfig.srv 
+    ElmoRecorderReadout.srv 
 )
 
 ## Generate added messages and services with any dependencies listed here
@@ -50,6 +51,12 @@ target_link_libraries(${PROJECT_NAME}_sim_node ${PROJECT_NAME} )
 
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}_sim_node ${catkin_LIBRARIES})
+
+add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_node ${catkin_EXPORTED_TARGETS})
+
+add_dependencies(${PROJECT_NAME}_sim_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_sim_node ${catkin_EXPORTED_TARGETS})
 
 #############
 ## Install ##
